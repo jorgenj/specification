@@ -39,6 +39,7 @@ _Status description:_
 | ✔️| Update start definition (move to top-level worklow param) | [spec doc](https://github.com/serverlessworkflow/specification/blob/0.6.x/specification.md) |
 | ✔️| Updated schedule definition | [spec doc](https://github.com/serverlessworkflow/specification/blob/0.6.x/specification.md) |
 | ✔️| Update data filters | [spec doc](https://github.com/serverlessworkflow/specification/blob/0.6.x/specification.md) |
+| ✔️| Rename switch state `default` to `defaultCondition` to avoid keyword conflicts for SDK's | [spec doc](../specification.md) |
 
 ## <a name="v05"></a> v0.5
 

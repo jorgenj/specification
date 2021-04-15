@@ -620,7 +620,7 @@ period, the workflow transitions to the "HandleNoVisaDecision" state.
         }
      ],
      "eventTimeout": "PT1H",
-     "default": {
+     "defaultCondition": {
         "transition": "HandleNoVisaDecision"
      }
   },
@@ -671,7 +671,7 @@ states:
   - eventRef: visaRejectedEvent
     transition: HandleRejectedVisa
   eventTimeout: PT1H
-  default:
+  defaultCondition:
     transition: HandleNoVisaDecision
 - name: HandleApprovedVisa
   type: subflow
@@ -755,7 +755,7 @@ If the applicants age is over 18 we start the application (subflow state). Other
               "transition": "RejectApplication"
             }
          ],
-         "default": {
+         "defaultCondition": {
             "transition": "RejectApplication"
          }
       },
@@ -805,7 +805,7 @@ states:
     transition: StartApplication
   - condition: "${ .applicants | .age < 18 }"
     transition: RejectApplication
-  default:
+  defaultCondition:
     transition: RejectApplication
 - name: StartApplication
   type: subflow
@@ -1124,7 +1124,7 @@ In the case job submission raises a runtime error, we transition to a SubFlow st
         "transition": "JobFailed"
       }
     ],
-    "default": {
+    "defaultCondition": {
       "transition": "WaitForCompletion"
     }
   },
@@ -1227,7 +1227,7 @@ states:
     transition: JobSucceeded
   - condition: "${ .jobstatus == \"FAILED\" }"
     transition: JobFailed
-  default:
+  defaultCondition:
     transition: WaitForCompletion
 - name: JobSucceeded
   type: operation
@@ -1923,7 +1923,7 @@ And for denied credit check, for example:
                     "transition": "RejectApplication"
                 }
             ],
-            "default": {
+            "defaultCondition": {
                "transition": "RejectApplication"
             }
         },
@@ -1991,7 +1991,7 @@ states:
     transition: StartApplication
   - condition: "${ .creditCheck | .decision == \"Denied\" }"
     transition: RejectApplication
-  default:
+  defaultCondition:
     transition: RejectApplication
 - name: StartApplication
   type: subflow
@@ -2516,7 +2516,7 @@ In our workflow definition then we can reference these files rather than definin
           "transition": "SendInsufficientResults"
         }
       ],
-      "default": {
+      "defaultCondition": {
         "transition": "SendPaymentSuccess"
       }
     },
@@ -2599,7 +2599,7 @@ states:
     transition: SendPaymentSuccess
   - condition: "${ .funds | .available == \"false\" }"
     transition: SendInsufficientResults
-  default:
+  defaultCondition:
     transition: SendPaymentSuccess
 - name: SendPaymentSuccess
   type: operation
@@ -3403,7 +3403,7 @@ And then our reusable sub-workflow which performs the checking of our car vitals
                }
             }
          ],
-         "default": {
+         "defaultCondition": {
             "transition": "WaitTwoMinutes"
          }
       },
@@ -3468,7 +3468,7 @@ states:
       produceEvents:
       - eventRef: DisplayFailedChecksOnDashboard
         data: "${ .evaluations }"
-  default:
+  defaultCondition:
     transition: WaitTwoMinutes
 - name: WaitTwoMinutes
   type: delay
